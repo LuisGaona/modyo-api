@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
-@JsonPropertyOrder({"name", "pokemonImageUrl", "types", "weight", "abilities"})
+@JsonPropertyOrder({"id","name", "pokemonImageUrl", "types", "weight", "abilities"})
 public class PokemonResponseDto extends PokemonBase {
   private String pokemonImageUrl;
 

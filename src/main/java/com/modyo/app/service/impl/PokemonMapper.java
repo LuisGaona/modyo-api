@@ -15,6 +15,7 @@ public class PokemonMapper {
     }
 
     return PokemonResponseDto.builder()
+            .id(pokemonDetails.getId())
             .name(pokemonDetails.getName())
             .pokemonImageUrl(photoUrl)
             .types(pokemonDetails.getTypes())

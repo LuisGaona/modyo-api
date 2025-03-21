@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @SuperBuilder
 public class PokemonBase {
-
+ private String id;
   private String name;
   private List<PokemonType> types;
   private Integer weight;
