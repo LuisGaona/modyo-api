@@ -44,9 +44,11 @@ public class PokemonServiceImpl implements PokemonService {
     try {
     PokenmonApiResponse response = callApiPokemon(limit, offset);
 
-    List<CompletableFuture<PokemonResponseDto>> resultFeatures = response.results().stream()
-            .map(data -> pokemonAsyncService.getPokemonDetails(data.url()))
-            .collect(Collectors.toList());
+      List<CompletableFuture<PokemonResponseDto>> resultFeatures = response.results().stream()
+              .map(data -> pokemonAsyncService.getPokemonDetails(data.url())
+                      .exceptionally(ex -> null))
+              .filter(future -> future != null && future.join() != null)
+              .collect(Collectors.toList());
 
     CompletableFuture<Void> allOf = CompletableFuture.allOf(resultFeatures.toArray(new CompletableFuture[0]));
     allOf.join();

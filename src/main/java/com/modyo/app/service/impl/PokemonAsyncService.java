@@ -29,6 +29,7 @@ public class PokemonAsyncService {
   public CompletableFuture<Characteristic> getPokemonDescription(String pokemonId) {
     String url = UriComponentsBuilder.fromHttpUrl("/characteristic")
             .pathSegment(pokemonId)
+            .path("/")
             .toUriString();
 
     Characteristic response = restTemplate.exchange(url, HttpMethod.GET, null,

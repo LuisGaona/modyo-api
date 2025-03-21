@@ -64,7 +64,7 @@ class PokemonAsyncServiceTest {
   @Test
   void testGetPokemonDescription() throws ExecutionException, InterruptedException {
     String pokemonId = "pikachuId";
-    String url = "/characteristic/pikachuId";
+    String url = "/characteristic/pikachuId/";
    Characteristic characteristic = Characteristic.builder().descriptions(Collections.singletonList(new Description("Pikachu is an Electric-type Pokémon",
             new NamedAPIResource("en","/characteristic/pikachuId")))).build();
 
