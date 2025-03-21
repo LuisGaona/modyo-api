@@ -1,0 +1,51 @@
+plugins {
+	id 'java'
+	id 'jacoco'
+	id 'org.springframework.boot' version '3.4.3'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.modyo'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	implementation 'com.github.ben-manes.caffeine:caffeine'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+
+	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation "net.logstash.logback:logstash-logback-encoder:7.4"
+
+	compileOnly 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+	finalizedBy tasks.jacocoTestReport
+}
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		csv.setRequired false
+		xml.setRequired true
+	}
+}
+

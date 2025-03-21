@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+  <springProperty scope="context" name="application.name" source="spring.application.name"/>
+
+  <appender name="CONSOLE_JSON" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+    <Pattern>[${spring.application.name:},TraceId-%X{dd.trace_id}, SpanId-%X{dd.span_id}]</Pattern>
+  </appender>
+
+  <root>
+    <appender-ref ref="CONSOLE_JSON"/>
+  </root>
+</configuration>
